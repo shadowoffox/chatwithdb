@@ -6,13 +6,24 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-
+import java.sql.SQLException;
 
 
 public class chat extends Application implements sendMsg {
     static Stage window;
-AuthServiceImpl a = new AuthServiceImpl();
-public Network network;
+AuthServiceImpl a;
+
+    {
+        try {
+            a = new AuthServiceImpl();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Network network;
 public TextArea textArea;
 public static String usr;
     @Override

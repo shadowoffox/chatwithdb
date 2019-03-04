@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,19 @@ import java.util.regex.Pattern;
 public class ChatServer {
 
     private final Pattern AUTH_PATTERN = Pattern.compile("^/auth (.+) (.+)$");
-    private AuthService authService = new AuthServiceImpl();
+
+    private AuthService authService;
+
+    {
+        try {
+            authService = new AuthServiceImpl();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private Map<String,ClientHander> clientHandlerMap= Collections.synchronizedMap(new HashMap<>());
 
     public void ChatServer() {
@@ -22,6 +35,7 @@ public class ChatServer {
 
         {
             System.out.println("Server Start");
+
             while (true) {
              Socket socket = serverSocket.accept();
                 System.out.println("Client connected!");
