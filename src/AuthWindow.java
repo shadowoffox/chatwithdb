@@ -51,7 +51,7 @@ public class AuthWindow {
               catch (IOException e1) {
                   e1.printStackTrace();
               }
-              chat.window.setTitle("Chating...From... " + tfLogin.getText()+"!");
+              Chat.window.setTitle("Chating...From... " + tfLogin.getText()+"!");
                 win.close();
     });
         pfPass.addEventFilter(KeyEvent.KEY_PRESSED,(KeyEvent e) -> {
@@ -71,7 +71,7 @@ public class AuthWindow {
                 catch (IOException e1) {
                     e1.printStackTrace();
                 }
-                chat.window.setTitle("Chating...From... " + tfLogin.getText()+"!");
+                Chat.window.setTitle("Chating...From... " + tfLogin.getText()+"!");
                 win.close();
             }
         });

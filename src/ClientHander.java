@@ -38,6 +38,8 @@ public class ClientHander {
 
                                 server.sendMessage(userTo, username, message);
 
+                                server.sendMessage(username, username,message);
+
                         }
                     }
                 } catch (IOException e) {

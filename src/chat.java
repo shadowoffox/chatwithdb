@@ -9,13 +9,13 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 
 
-public class chat extends Application implements sendMsg {
+public class Chat extends Application implements sendMsg {
     static Stage window;
-AuthServiceImpl a;
-
+AuthServiceImpl auth;
+ public static ComboBox<String> clients;
     {
         try {
-            a = new AuthServiceImpl();
+            auth = new AuthServiceImpl();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -25,7 +25,7 @@ AuthServiceImpl a;
 
     public Network network;
 public TextArea textArea;
-public static String usr;
+
     @Override
     public void start (Stage primaryStage) throws Exception {
 
@@ -39,14 +39,15 @@ public static String usr;
         TextField field = new TextField("send message");
 
         Button buttonSend = new Button("Send");
-        ComboBox<String> Clients = new ComboBox<String>();
-        for (String clients: a.users.keySet()) {
-            Clients.getItems().add(clients);
+      clients = new ComboBox<String>();
+        for (String logins: auth.users.keySet()) {
+            clients.getItems().add(logins);
         }
-        Clients.getSelectionModel().select(1);
+        clients.getSelectionModel().select(1);
+        Button buttonChange = new Button("Change Name");
 
         sendline.setAlignment(Pos.CENTER);
-        sendline.getChildren().addAll(Clients,field, buttonSend);
+        sendline.getChildren().addAll(clients,field, buttonSend,buttonChange);
 
         HBox area = new HBox(5);
         textArea = new TextArea();
@@ -66,17 +67,20 @@ public static String usr;
 
         window.show();
 
-        field.setPrefWidth(scene.getWidth()-buttonSend.getWidth()-85);
+        field.setPrefWidth(scene.getWidth()-buttonSend.getWidth()-150);
         buttonSend.setOnAction(e -> {
             String text = field.getText();
-            String userTo = Clients.getValue();
+            String userTo = clients.getValue();
             Message msg = new Message(network.getUsername(), userTo, text);
            network.sendMessageToUser(msg);
             field.setText("");
 
         });
+        buttonChange.setOnAction(event -> ChangeName.display(network));
 
         AuthWindow.display(network);
+
+
 window.setOnCloseRequest(e-> System.exit(0));
     }
 

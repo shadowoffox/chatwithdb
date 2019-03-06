@@ -86,7 +86,8 @@ public class ChatServer {
         if (userToClientHandler != null) {
             userToClientHandler.sendMessage(userFrom, msg);
         } else {
-            System.out.printf("User %s not found. Message from %s is lost.%n", userTo, userFrom);
+            System.out.printf("User %s not found. Message from %s is lost.%n try again ", userTo, userFrom);
+
         }
     }
 }

@@ -1,13 +1,11 @@
 import java.sql.*;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 public class AuthServiceImpl implements AuthService{
 
 public Map<String,String> users = new HashMap<>();
-    public List<String> onLineUsers = new LinkedList<>();
+
 
     public AuthServiceImpl() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");

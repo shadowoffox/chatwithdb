@@ -63,8 +63,8 @@ public class Network implements Closeable {
             String response = in.readUTF();
             if (response.equals("/auth succesful")){
               this.username=username;
-              out.writeUTF("Client " + username + "Join to chat!");
-              out.flush();
+                Message welcomeMsg = new Message(" ",username,"Client " + username + " Hello! Welcome to our chat!");
+                messageSender.sendMsg(welcomeMsg);
              receiver.start();
             } else {
                 throw new AuthException(){};
