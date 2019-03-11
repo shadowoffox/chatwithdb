@@ -12,9 +12,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ChatServer {
-
+   // User nname;
     private final Pattern AUTH_PATTERN = Pattern.compile("^/auth (.+) (.+)$");
-
+    Socket socket;
     private AuthService authService;
 
     {
@@ -27,7 +27,7 @@ public class ChatServer {
         }
     }
 
-    private Map<String,ClientHander> clientHandlerMap= Collections.synchronizedMap(new HashMap<>());
+    public Map<String,ClientHander> clientHandlerMap= Collections.synchronizedMap(new HashMap<>());
 
     public void ChatServer() {
 
@@ -37,7 +37,7 @@ public class ChatServer {
             System.out.println("Server Start");
 
             while (true) {
-             Socket socket = serverSocket.accept();
+             socket = serverSocket.accept();
                 System.out.println("Client connected!");
                 try {
                     DataInputStream in = new DataInputStream(socket.getInputStream());
@@ -77,6 +77,7 @@ public class ChatServer {
         }
 
     }
+
     public void unsubscribeClient(ClientHander clientHandler) {
         clientHandlerMap.remove(clientHandler.getUsername());
        // broadcastUserDisconnected();
@@ -86,7 +87,7 @@ public class ChatServer {
         if (userToClientHandler != null) {
             userToClientHandler.sendMessage(userFrom, msg);
         } else {
-            System.out.printf("User %s not found. Message from %s is lost.%n try again ", userTo, userFrom);
+            System.out.printf("User %s not found. Message from %s is lost.%n ", userTo, userFrom);
 
         }
     }

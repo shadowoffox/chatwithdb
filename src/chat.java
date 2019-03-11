@@ -6,6 +6,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
 
 
@@ -81,7 +84,13 @@ public TextArea textArea;
         AuthWindow.display(network);
 
 
-window.setOnCloseRequest(e-> System.exit(0));
+window.setOnCloseRequest(e-> {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(network.getUsername()+".txt",true))) {
+     writer.write( textArea.getText());
+    }
+    catch (IOException e1) {
+    }
+    System.exit(0);});
     }
 
     @Override

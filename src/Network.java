@@ -42,6 +42,7 @@ public class Network implements Closeable {
                             Message message = new Message(matcher.group(1),username,matcher.group(2));
                             messageSender.sendMsg(message);
                         } else if (msg.startsWith(USER_LIST_PATTERN)){
+
                             //Обновить список
                         }
                               } catch (IOException e) {
@@ -63,7 +64,7 @@ public class Network implements Closeable {
             String response = in.readUTF();
             if (response.equals("/auth succesful")){
               this.username=username;
-                Message welcomeMsg = new Message(" ",username,"Client " + username + " Hello! Welcome to our chat!");
+                Message welcomeMsg = new Message(" ",username,username + " Hello! Welcome to our chat!");
                 messageSender.sendMsg(welcomeMsg);
              receiver.start();
             } else {
@@ -88,8 +89,12 @@ public class Network implements Closeable {
         }
 
     }
+
     public String getUsername() {
         return username;
+    }
+    public void setUsetname(String name){
+        this.username = name;
     }
     @Override
     public void close()  {

@@ -11,9 +11,8 @@ import javafx.stage.Stage;
 import java.sql.*;
 
 public class ChangeName {
-
+User namm;
     public static void display(Network network){
-
         Stage win = new Stage();
         win.initModality(Modality.APPLICATION_MODAL);
         win.setTitle("Change your name");
@@ -51,7 +50,7 @@ public class ChangeName {
         } catch (SQLException e) {
                 e.printStackTrace();
             }
-
+                network.setUsetname(tfNewLogin.getText());
             //2 пункт поменять значение в мапе
             try {
                 AuthServiceImpl updateLoginMap = new AuthServiceImpl();
@@ -67,8 +66,7 @@ public class ChangeName {
                 e.printStackTrace();
             }
             Chat.window.setTitle("Chating...From... " + tfNewLogin.getText()+"!");
-
-
+            System.out.println(network.getUsername());
             win.close();
 
             });

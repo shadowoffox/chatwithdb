@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class ClientHander {
     private static final Pattern MESSAGE_PATTERN = Pattern.compile("^/w (\\w+) (.+)", Pattern.MULTILINE);
     private static final String MESSAGE_SEND_PATTERN = "/w %s %s";
+    private static final String USER_LIST_PATTERN = "/userlist";
 
     private final Thread handleThread;
     private final DataInputStream in;
